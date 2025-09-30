@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: springboot
-          image: kopo21/board:sha-a9f5675
+          image: kopo21/board:sha-613f020
           imagePullPolicy: IfNotPresent  # {{ .Values.image.pullPolicy }}
           ports:
             - containerPort: 8080
