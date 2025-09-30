@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+        - name: mysql
+          image: mysql:8.0   # 원하는 버전 지정 가능
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: rootpass   # 루트 비밀번호
+            - name: MYSQL_DATABASE
+              value: boarddb    # 초기 생성할 DB
+            - name: MYSQL_USER
+              value: boarduser  # 사용자 계정
+            - name: MYSQL_PASSWORD
+              value: boardpass  # 사용자 비밀번호
+          ports:
+            - containerPort: 3306
