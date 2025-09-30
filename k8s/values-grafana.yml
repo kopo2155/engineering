@@ -1,0 +1,19 @@
+replicas: 1
+
+service: 
+  type: NodePort
+  port: 3000
+  targetPort: 3000
+  nodePort: 31300   # 30000~32767 사이 숫자면 됨
+
+persistence:
+  type: pvc 
+  enabled: true 
+  accessModes:
+    - ReadWriteOnce 
+  size: 10Gi 
+  finalizers: 
+    - kubernetes.io/pvc-protection
+
+adminUser: admin 
+adminPassword: test1234!234
