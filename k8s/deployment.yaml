@@ -2,8 +2,10 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: springboot
+  labels:
+    app: springboot
 spec:
-  replicas: {{ .Values.replicaCount }}
+  replicas: 2                # {{ .Values.replicaCount }} → 예: 2
   selector:
     matchLabels:
       app: springboot
@@ -14,14 +16,14 @@ spec:
     spec:
       containers:
         - name: springboot
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          image: kopo2155/board:latest   # {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          imagePullPolicy: IfNotPresent  # {{ .Values.image.pullPolicy }}
           ports:
             - containerPort: 8080
           env:
             - name: SPRING_DATASOURCE_URL
-              value: jdbc:mysql://mysql:{{ .Values.mysql.port }}/{{ .Values.mysql.database }}
+              value: jdbc:mysql://mysql:3306/boarddb   # {{ .Values.mysql.port }} / {{ .Values.mysql.database }}
             - name: SPRING_DATASOURCE_USERNAME
-              value: {{ .Values.mysql.user }}
+              value: boarduser                        # {{ .Values.mysql.user }}
             - name: SPRING_DATASOURCE_PASSWORD
-              value: {{ .Values.mysql.password }}
+              value: boardpass   
